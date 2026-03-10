@@ -10,29 +10,34 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 import joblib
-model=joblib.load("Salary_prediction_rfr_model.pkl")
-encoder=joblib.load("label_encoder_Salary.pkl")
-st.title("Salary prediction model")
 
-age=st.number_input("enter your Age",18,65)
-gender=st.selectbox("select your gender",encoder["Gender"].classes_)
-education =st.selectbox("select your education Level",encoder["Education Level"].classes_)
-job_title=st.selectbox("select your job title",encoder["Job Title"].classes_)
-experience=st.number_input("enter your experience (in year)",0,50)
 
-df= pd.DataFrame({
-    "Age":[age],
+model = joblib.load("salary_prediction_rfr_model1.pk1")
+encoder = joblib.load("label_encoder_Salary.pk1")
+
+st.title("Salary Prediction Model")
+
+age = st.number_input("Enter your age", 18,65)
+gender = st.selectbox("Select your gender", encoder["Gender"].classes_)
+education = st.selectbox("Select your education", encoder["Education Level"].classes_)
+job_title = st.selectbox("Select your job title" ,encoder["Job Title"].classes_)
+experience = st.number_input("Enter your experience (in years)",0,50)
+
+
+df = pd.DataFrame({
+"Age":[age],
     "Gender":[gender],
     "Education Level":[education],
-    " Job Title":[job_title],
-    " Years of experience":[experience]               
+    "Job Title":[job_title],
+    "Years of Experience":[experience]
 })
-if st.button("predict salary"):
-    for col in encoder:
-        df[col] = encoder[col].transform(df[col])
-    prediction = model.predict(df)
-    st.success(f"predicted Salary :{prediction [0]:}")
-    
+
+if st.button("predict_salary"):
+  for col in encoder:
+    df[col] = encoder[col].transform(df[col])
+
+  prediction = model.predict(df)
+  st.success(f"predicted salary : {prediction[0]:}")
 
 
 
