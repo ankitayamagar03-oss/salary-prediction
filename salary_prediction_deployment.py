@@ -15,7 +15,7 @@ encoder=joblib.load("label_encoder_Salary.pkl")
 st.title("Salary prediction model")
 
 age=st.number_input("enter your Age",18,65)
-gender=st.selextbox("select your gender",encoder["Gender"].classes_)
+gender=st.selectbox("select your gender",encoder["Gender"].classes_)
 education =st.selectbox("select your education Level",encoder["Education Level"].classes_)
 job_title=st.selectbox("select your job title",encoder["Job Title"].classes_)
 experience=st.number_input("enter your experience (in year)",0,50)
