@@ -41,4 +41,3 @@ if st.button("predict_salary"):
 
 
 
-
